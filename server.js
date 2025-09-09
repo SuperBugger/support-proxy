@@ -4,10 +4,16 @@ import multer from "multer";
 import axios from "axios";
 import cors from "cors";
 import FormData from "form-data";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use("/static", express.static(path.join(__dirname, "public")));
+
 const upload = multer();
 
 const FD_DOMAIN = process.env.FD_DOMAIN;   // <--- ТВОЙ субдомен без https
